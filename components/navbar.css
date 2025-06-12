@@ -1,0 +1,119 @@
+.navbar {
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid #2a2a2a;
+  width: 100%;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  z-index: 1;
+  width: 100%;
+  padding: 0 50px;
+  max-width: 1400px;
+}
+
+.navbar-logo {
+  color: var(--text-primary);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+  gap: 1rem;
+}
+
+.nav-item {
+  height: 80px;
+}
+
+.nav-links {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-links:hover {
+  color: var(--primary-blue);
+  transform: translateY(-2px);
+}
+
+/* Hide menu icon on larger screens */
+.menu-icon {
+  display: none;
+}
+
+
+/* === MOBILE RESPONSIVE STYLES === */
+@media screen and (max-width: 960px) {
+  .navbar-container {
+    padding: 0 25px; /* Adjust padding for mobile */
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 80px); /* Full height minus navbar */
+    position: absolute;
+    top: 80px;
+    left: -100%; /* Hide menu off-screen */
+    opacity: 1;
+    transition: all 0.5s ease;
+    background: #121212;
+    gap: 0;
+  }
+
+  .nav-menu.active {
+    left: 0; /* Bring menu on-screen */
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .nav-item {
+    width: 100%;
+    height: auto; /* Adjust height for column layout */
+  }
+  
+  .nav-links {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+  }
+
+  .nav-links:hover {
+    color: var(--primary-blue);
+    transform: scale(1.1);
+  }
+
+  .menu-icon {
+    display: block; /* Show hamburger menu icon */
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+}

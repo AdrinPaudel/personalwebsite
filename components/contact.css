@@ -1,0 +1,75 @@
+/* --- Styles for the Contact Section --- */
+
+.contact-container {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: var(--background-dark);
+}
+
+.contact-container .section-title {
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Blue underline effect */
+.contact-container .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-blue);
+    border-radius: 2px;
+}
+
+.contact-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-links-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: 25px; /* Space between the cards */
+}
+
+.contact-link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 25px;
+    background-color: var(--background-light);
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    min-width: 150px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.contact-link-card:hover {
+    transform: translateY(-5px);
+    background-color: #2a2a2a;
+    color: var(--primary-blue);
+}
+
+.contact-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.contact-name {
+    font-weight: 500;
+}

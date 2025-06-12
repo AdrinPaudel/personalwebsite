@@ -1,0 +1,7 @@
+/* This file reuses many class names from Experience.css */
+
+.education-container {
+  padding: 100px 20px;
+  /* Updated background color for alternating effect */
+  background-color: var(--background-dark);
+}

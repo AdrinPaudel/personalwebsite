@@ -1,0 +1,78 @@
+.experience-container {
+  padding: 100px 20px;
+  background-color: var(--background-light);
+}
+
+/* A reusable class for all section titles */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: var(--text-primary);
+  border-bottom: 3px solid var(--primary-blue);
+  padding-bottom: 10px;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background-color: #2a2a2a;
+  top: 15px;
+  bottom: 0;
+  left: 20px;
+}
+
+.timeline-block {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 100%;
+  padding-left: 70px;
+  margin-bottom: 30px;
+}
+
+.timeline-block::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 5px;
+  left: 13px;
+  background-color: var(--text-primary);
+  border: 3px solid var(--primary-blue);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-block h3 {
+  font-size: 1.7rem;
+  color: var(--text-primary);
+}
+
+.timeline-subhead {
+  color: var(--primary-blue);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.timeline-block ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.timeline-block li {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
