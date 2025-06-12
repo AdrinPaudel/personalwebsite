@@ -40,9 +40,9 @@ const contactLinks = [
 const Contact = () => {
   return (
     <section className="contact-container" id="contact">
-      <h2 className="section-title">Get In Touch</h2>
+      <h2 className="section-title">Contact</h2>
       <p className="contact-subtitle">
-        I&apos;m currently open to new opportunities and collaborations. Feel free to reach out!
+        I&apos;m open to new opportunities and collaborations. Feel free to reach out!
       </p>
       <div className="contact-links-wrapper">
         {contactLinks.map((link) => (

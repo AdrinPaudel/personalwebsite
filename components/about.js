@@ -17,14 +17,12 @@ const About = () => {
         <div className="about-text">
           <h2>About Me</h2>
           <p>
-            I am a final-year Computer Engineering student at Kathmandu
-            Engineering College with a passion for building beautiful and
-            functional digital experiences. I specialize in combining technical
-            development with user-centric design, using tools like Next.js,
-            Flutter, and Figma to bring ideas to life. From developing
-            intelligent web applications to designing intuitive mobile UIs, I am
-            driven by a desire to learn, grow, and contribute to projects that
-            solve real-world problems.
+            I am a final-year Computer Engineering student specializing in digital creation.
+            My technical expertise involves building and deploying full-stack web and mobile applications,
+             designing intuitive user interfaces (UI/UX), and integrating AI models.
+             I also have a strong creative side, with hands-on skills in video editing and content creation.
+             As a driven team player, I am passionate about applying this blend of technical and 
+             creative skills to solve real-world problems and am dedicated to continuous growth.
           </p>
         </div>
       </div>

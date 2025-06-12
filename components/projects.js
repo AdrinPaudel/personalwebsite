@@ -5,160 +5,166 @@ import Link from 'next/link';
 import ProjectImage from './ProjectImage';
 import './projects.css';
 
-// --- Helper function to generate image paths ---
-// This makes it much easier to manage large numbers of images.
+// Helper function to generate image paths.
 const generateImagePaths = (projectId, count, extension = 'png') => {
-    const paths = [];
-    for (let i = 1; i <= count; i++) {
-        paths.push(`/images/project${projectId}-${i}.${extension}`);
-    }
-    return paths;
+    return Array.from({ length: count }, (_, i) => `/images/project${projectId}-${i + 1}.${extension}`);
 };
 
-
-// --- Updated Project Data ---
-// Now using the helper function to create the image arrays.
-const projectData = [
+// Full project data with new categories.
+const allProjects = [
   {
     id: 1,
-    title: 'Insurance Policy Comparison Web App',
-    description: 'An ongoing project to develop a seamless web application using Next.js. The platform allows users to easily compare various life insurance policies, featuring a clean and user-friendly interface designed in Figma.',
-    // Generates 18 image paths from project1-1.png to project1-18.png
+    title: 'Insurance Policy Comparison Web App "Insurance-Sathi"',
+    description: 'A comprehensive web application built with Next.js that allows users to compare life insurance policies. Features a clean, user-friendly interface designed in Figma to simplify complex information.',
     images: generateImagePaths(1, 18),
-    tech: ['Next.js', 'Figma', 'JavaScript'],
+    tech: ['React', 'AI', 'Vercel'],
     liveLink: '#',
-    githubLink: 'https://github.com/AdrinPaudel',
+    githubLink: 'https://github.com/AdrinPaudel/FinalWebsite',
+    category: 'WebDev',
+  },
+  {
+    id: 4,
+    title: 'Ant Crawl : Prank App',
+    description: 'A fun and harmless prank application for Android, developed using Flutter. The app overlays a realistic, animated ant that walks across the screen over any other application, creating a surprising and amusing user experience.',
+    images: generateImagePaths(4, 2),
+    tech: ['Flutter', 'Cart', 'Android'],
+    liveLink: 'https://play.google.com/store/apps/details?id=com.adrin.antapp',
+    githubLink: 'https://github.com/AdrinPaudel/antapp',
+    category: 'AppDev',
   },
   {
     id: 2,
-    title: 'UI/UX Design for Learn Smart AI',
-    description: 'As a volunteer, I designed the complete user interface and experience for "Learn Smart," an AI-based learning platform. My focus was on creating engaging and intuitive web and mobile app designs.',
-    // Generates 2 image paths for project 2
+    title: 'UI/UX Design "Learn Smart"',
+    description: 'I designed the initial user interface and experience for "Learn Smart", an AI-based learning platform. My focus was on creating engaging and intuitive web and mobile app designs.',
     images: generateImagePaths(2, 2),
-    tech: ['Figma', 'UI/UX Design'],
+    tech: ['Figma', 'UI/UX Design', 'Wireframing'],
     liveLink: '#',
     githubLink: '',
+    category: 'UI/UX',
+  },
+   {
+    id: 5,
+    title: 'Game Testing "Project Prison"',
+    description: 'Performed comprehensive Quality Assurance testing for the indie game "Project Prison" on Steam. Identified, documented, and reported bugs related to gameplay, UI, and performance, contributing to a more stable final release.',
+    images: generateImagePaths(5, 3),
+    tech: ['Testing', 'Bug Reporting', 'Steam'],
+    liveLink: '#',
+    githubLink: '',
+    category: 'Testing',
   },
   {
-    id: 3,
-    title: 'Online Electronics Shop Business Card',
-    description: 'Designed a modern and clean business card for an online electronics shop specializing in Arduino and other components. The design focuses on brand identity and clear communication of contact details.',
-    // Generates 2 image paths for project 3
+    id: 6,
+    title: 'Business Card "Tech-Nova"',
+    description: 'Made Business card for online first Electronics shop "Tech-Nova" selling electronics like Arduino,Sensors,etv',
     images: generateImagePaths(3, 2),
-    tech: ['Graphic Design', 'Branding'],
+    tech: ['Graphics', 'Photoshop'],
     liveLink: '#',
     githubLink: '',
+    category: 'UI/UX',
   },
-  // Project 4 (Personal Portfolio) has been removed.
 ];
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [filteredProjects, setFilteredProjects] = useState(allProjects);
+  const [activeProject, setActiveProject] = useState(allProjects[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Function to open the modal
-  const handleCardClick = (project) => {
-    setSelectedProject(project);
-    setCurrentImageIndex(0); // Reset to the first image
-  };
+  const categories = ['All', 'WebDev', 'AppDev', 'UI/UX', 'Testing', 'Content'];
 
-  // Function to close the modal
-  const closeModal = () => {
-    setSelectedProject(null);
-  };
-
-  // Carousel navigation
-  const showNextImage = (e) => {
-    e.stopPropagation(); // Prevent modal from closing
-    const newIndex = (currentImageIndex + 1) % selectedProject.images.length;
-    setCurrentImageIndex(newIndex);
-  };
-
-  const showPrevImage = (e) => {
-    e.stopPropagation();
-    const newIndex = (currentImageIndex - 1 + selectedProject.images.length) % selectedProject.images.length;
-    setCurrentImageIndex(newIndex);
-  };
-  
-    const goToImage = (e, index) => {
-    e.stopPropagation();
-    setCurrentImageIndex(index);
-  };
-
-  // Close modal with Escape key
+  // Effect to filter projects when category changes
   useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
+    if (activeCategory === 'All') {
+      setFilteredProjects(allProjects);
+    } else {
+      setFilteredProjects(allProjects.filter(p => p.category === activeCategory));
+    }
+  }, [activeCategory]);
 
+  // Effect to update the featured project when the filtered list changes
+  useEffect(() => {
+    setActiveProject(filteredProjects[0]);
+  }, [filteredProjects]);
+  
+  // Effect to reset image carousel when the featured project changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [activeProject]);
+  
+  // Handlers
+  const handleProjectSelect = (project) => setActiveProject(project);
+  const showNextImage = () => setCurrentImageIndex((prev) => (prev + 1) % activeProject.images.length);
+  const showPrevImage = () => setCurrentImageIndex((prev) => (prev - 1 + activeProject.images.length) % activeProject.images.length);
 
   return (
     <section className="projects-container" id="projects">
-      <h2 className="section-title">My Projects</h2>
-      <div className="projects-grid">
-        {projectData.map((project) => (
-          <div key={project.id} className="project-card" onClick={() => handleCardClick(project)}>
-              <div className="project-image-container">
-                  <ProjectImage src={project.images[0]} alt={`Screenshot of ${project.title}`} />
-              </div>
-              <div className="project-content">
-                  <h3>{project.title}</h3>
-                  <div className="project-tech-list">
-                      {project.tech.map((tech, i) => ( <li key={i}>{tech}</li> ))}
-                  </div>
-                  <div className="click-to-expand">View Details</div>
-              </div>
-          </div>
+      <h2 className="section-title">Projects & Works Details</h2>
+      
+      {/* Functional Filter Buttons */}
+      <div className="filter-buttons">
+        {categories.map(category => (
+          <button 
+            key={category} 
+            className={`filter-btn ${activeCategory === category ? 'active' : ''}`}
+            onClick={() => setActiveCategory(category)}
+          >
+            {category}
+          </button>
         ))}
       </div>
 
-      {/* Modal - Rendered when a project is selected */}
-      {selectedProject && (
-        <div className="project-modal-overlay" onClick={closeModal}>
-          <div className="project-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button onClick={closeModal} className="modal-close-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-
-            {/* Image Carousel */}
-            <div className="modal-carousel">
-                <div className="carousel-image-wrapper">
-                    <ProjectImage src={selectedProject.images[currentImageIndex]} alt={`${selectedProject.title} image ${currentImageIndex + 1}`} />
-                </div>
-                {selectedProject.images.length > 1 && (
-                    <>
-                        <button onClick={showPrevImage} className="carousel-btn prev">&lt;</button>
-                        <button onClick={showNextImage} className="carousel-btn next">&gt;</button>
-                        <div className="carousel-dots">
-                            {selectedProject.images.map((_, index) => (
-                                <span key={index} className={`dot ${currentImageIndex === index ? 'active' : ''}`} onClick={(e) => goToImage(e, index)}></span>
-                            ))}
-                        </div>
-                    </>
-                )}
+      {filteredProjects.length > 0 && activeProject ? (
+        <div className="projects-layout">
+          {/* Featured Project Column (Left) */}
+          <div className="featured-project">
+            <div className="featured-carousel">
+              <div className="carousel-image-wrapper">
+                <ProjectImage 
+                  src={activeProject.images[currentImageIndex]} 
+                  alt={`${activeProject.title} screenshot ${currentImageIndex + 1}`} 
+                />
+              </div>
+              {activeProject.images.length > 1 && (
+                <>
+                  <button onClick={showPrevImage} className="carousel-btn prev">&lt;</button>
+                  <button onClick={showNextImage} className="carousel-btn next">&gt;</button>
+                </>
+              )}
             </div>
-
-            {/* Project Details */}
-            <div className="modal-details">
-                <h3>{selectedProject.title}</h3>
-                <p>{selectedProject.description}</p>
-                <div className="project-links">
-                    {selectedProject.liveLink && selectedProject.liveLink !== '#' && (
-                        <Link href={selectedProject.liveLink} className="project-link" target="_blank" rel="noopener noreferrer">View Project</Link>
-                    )}
-                    {selectedProject.githubLink && (
-                        <Link href={selectedProject.githubLink} className="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</Link>
-                    )}
-                </div>
+            <div className="featured-details">
+              <h3>{activeProject.title}</h3>
+              <ul className="project-tech-list">
+                  {activeProject.tech.map((tech, i) => ( <li key={i}>{tech}</li> ))}
+              </ul>
+              <p>{activeProject.description}</p>
+              <div className="project-links">
+                {activeProject.liveLink && activeProject.liveLink !== '#' && (
+                    <Link href={activeProject.liveLink} className="project-link" target="_blank" rel="noopener noreferrer">View Live</Link>
+                )}
+                {activeProject.githubLink && (
+                    <Link href={activeProject.githubLink} className="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</Link>
+                )}
+              </div>
             </div>
           </div>
+
+          {/* Project List Column (Right) */}
+          <div className="project-list">
+            {filteredProjects.map((project) => (
+              <div 
+                key={project.id} 
+                className={`project-list-item ${project.id === activeProject.id ? 'active' : ''}`}
+                onClick={() => handleProjectSelect(project)}
+              >
+                <img src={project.images[0]} alt={project.title} className="list-item-image" />
+                <h4 className="list-item-title">{project.title}</h4>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="no-projects-message">
+          <p>No projects found in this category.</p>
         </div>
       )}
     </section>

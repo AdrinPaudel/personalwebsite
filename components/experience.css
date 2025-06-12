@@ -3,7 +3,6 @@
   background-color: var(--background-light);
 }
 
-/* A reusable class for all section titles */
 .section-title {
   text-align: center;
   font-size: 2.5rem;
@@ -17,9 +16,10 @@
   margin-right: auto;
 }
 
+/* --- Timeline Styles --- */
 .timeline {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 50px auto 0 auto; /* Added top margin */
   position: relative;
 }
 
@@ -47,7 +47,7 @@
   position: absolute;
   width: 15px;
   height: 15px;
-  top: 5px;
+  top: 12px; /* Corrected alignment for the circle */
   left: 13px;
   background-color: var(--text-primary);
   border: 3px solid var(--primary-blue);
@@ -56,14 +56,28 @@
 }
 
 .timeline-block h3 {
-  font-size: 1.7rem;
+  font-size: 2rem; /* Reverted to a larger size */
   color: var(--text-primary);
 }
 
 .timeline-subhead {
   color: var(--primary-blue);
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 5px; 
+  font-size: 1.2rem; 
+}
+
+/* Updated style for the date element */
+.timeline-date {
+  display: inline-block; /* This makes the element wrap its content */
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin-bottom: 15px;
+  background-color: var(--background-dark);
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
 }
 
 .timeline-block ul {

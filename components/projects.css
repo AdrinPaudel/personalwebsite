@@ -1,159 +1,77 @@
-/* Existing styles - no changes */
+/* --- Main Project Section Styles --- */
 .projects-container {
   padding: 100px 20px;
   background-color: var(--background-light);
-  position: relative; /* Needed for modal stacking context */
 }
 
-.projects-grid {
+/* --- New Filter Button Styles --- */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.filter-btn {
+  background-color: var(--background-dark);
+  color: var(--text-secondary);
+  border: 1px solid #333;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #2a2a2a;
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+}
+
+/* --- Two-Column Layout --- */
+.projects-layout {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 2.5fr 1fr;
   gap: 40px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  align-items: start; /* Aligns items to the top */
 }
 
-.project-card {
+/* === Column 1: Featured Project === */
+.featured-project {
   background-color: var(--background-dark);
   border-radius: 12px;
+  border: 1px solid #2a2a2a;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid #2a2a2a;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
-}
-
-.project-image-container {
+.featured-carousel {
   width: 100%;
-  height: 250px;
-  background-color: var(--background-dark);
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-image {
-    transform: scale(1.05);
-}
-
-.project-content {
-  padding: 25px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.project-content h3 {
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  margin-bottom: 15px;
-}
-
-.project-tech-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding: 0;
-}
-
-.project-tech-list li {
-  background-color: #333;
-  color: var(--text-secondary);
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-}
-
-.click-to-expand {
-  color: var(--primary-blue);
-  font-weight: 500;
-  margin-top: auto;
-  font-size: 0.9rem;
-}
-
-/* === NEW MODAL STYLES === */
-
-.project-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease;
-  backdrop-filter: blur(5px);
-}
-
-.project-modal-content {
-  background-color: var(--background-dark);
-  border: 1px solid #333;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 900px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  animation: slideInUp 0.4s ease;
-  overflow: hidden; /* Important for border-radius */
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  color: white;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-}
-
-.modal-close-btn:hover {
-  background-color: rgba(255, 0, 0, 0.7);
-}
-
-/* --- Carousel --- */
-.modal-carousel {
-  width: 100%;
-  height: 60%;
   position: relative;
   background-color: #000;
-  flex-shrink: 0; /* Prevents the carousel from shrinking */
+  aspect-ratio: 16 / 9;
 }
 
 .carousel-image-wrapper {
   width: 100%;
   height: 100%;
 }
-/* === FIX #1 IS HERE === */
-.carousel-image-wrapper .project-image { /* Target ProjectImage component */
+
+.carousel-image-wrapper .project-image {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Use 'contain' to show the full image with gaps */
+  object-fit: cover;
 }
 
 .carousel-btn {
@@ -169,66 +87,55 @@
   font-size: 1.5rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  z-index: 5;
 }
 
 .carousel-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.carousel-btn.prev {
-  left: 15px;
-}
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
 
-.carousel-btn.next {
-  right: 15px;
-}
-
-.carousel-dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.dot.active {
-  background-color: var(--primary-blue);
-}
-
-/* --- Details --- */
-/* === FIX #2 IS HERE === */
-.modal-details {
-  height: 40%; /* Explicitly set height */
+.featured-details {
   padding: 30px;
-  overflow-y: auto; /* Allows content to scroll if it's too long */
+  flex-grow: 1;
 }
 
-.modal-details h3 {
+.featured-details h3 {
   font-size: 2rem;
   color: var(--text-primary);
   margin-bottom: 15px;
 }
 
-.modal-details p {
+.featured-details p {
   color: var(--text-secondary);
   line-height: 1.6;
+  margin-top: 20px;
   margin-bottom: 25px;
+}
+
+.project-tech-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+
+.project-tech-list li {
+  background-color: #333;
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
 }
 
 .project-links {
   display: flex;
   gap: 20px;
-  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .project-link {
@@ -239,35 +146,89 @@
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.2s ease;
+  text-align: center;
 }
 
 .project-link:hover {
   background-color: #0056b3;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 960px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
+/* === Column 2: Project List === */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adjusted gap for a tighter fit */
+  max-height: 700px; /* Set a max-height */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  padding-right: 10px; /* Add some padding so scrollbar doesn't overlap content */
+}
+
+.project-list-item {
+  background: var(--background-dark);
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0; /* Prevents items from shrinking */
+}
+
+.project-list-item:hover {
+  background-color: #252525;
+  border-color: var(--primary-blue);
+  transform: translateX(5px);
+}
+
+.project-list-item.active {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+  background-color: #1f1f1f;
+}
+
+.list-item-image {
+  width: 120px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.list-item-title {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+/* New style for when a filter returns no projects */
+.no-projects-message {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 50px;
+  background-color: var(--background-dark);
+  border-radius: 12px;
+  border: 1px dashed #333;
+}
+
+/* === Responsive Styles === */
+@media screen and (max-width: 1024px) {
+  .projects-layout {
+    grid-template-columns: 1fr; /* Stack columns on tablets and mobile */
+  }
+  .project-list {
+      max-height: none; /* Disable max-height on smaller screens */
+      overflow-y: visible;
+      padding-right: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .project-modal-content {
-    max-height: 85vh;
+  .featured-details h3 {
+    font-size: 1.5rem;
   }
-  .modal-details h3 {
-      font-size: 1.5rem;
+  .featured-details p {
+      font-size: 0.95rem;
   }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
 }
